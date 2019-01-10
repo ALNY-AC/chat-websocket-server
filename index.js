@@ -45,4 +45,4 @@ var server = ws.createServer(function (conn) {
         console.log("异常关闭")
     });
 }).listen(12138)
-console.log("WebSocket建立完毕")
+console.log("WebSocket建立完毕.")
