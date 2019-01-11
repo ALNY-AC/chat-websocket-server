@@ -67,7 +67,7 @@ console.log("开始建立连接...")
 var server = ws.createServer(function (conn) {
 
 
-
+    let room_id = '';
 
     conn.on("text", function (text) {
         console.warn(RoomList);
@@ -83,6 +83,7 @@ var server = ws.createServer(function (conn) {
          * 
          * 
          */
+        room_id = info.roomId;
         if (info.type == 'addRoom') {
             info.message = '进入房间';
             let isAdd = true;
@@ -107,14 +108,10 @@ var server = ws.createServer(function (conn) {
 
     })
     conn.on("close", function (code, reason) {
-        console.warn('Gcode：', code);
-        console.warn('Greason：', reason);
-        console.log("关闭连接")
+        console.log("关闭连接：", room_id)
     });
     conn.on("error", function (code, reason) {
-        console.warn('Ycode：', code);
-        console.warn('Yreason：', reason);
-        console.log("异常关闭")
+        console.log("异常关闭：", room_id)
     });
 }).listen(12138)
 console.log("WebSocket建立完毕.")
