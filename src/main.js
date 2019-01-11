@@ -65,6 +65,10 @@ let RoomList = [
 
 console.log("开始建立连接...")
 var server = ws.createServer(function (conn) {
+
+
+
+
     conn.on("text", function (text) {
         console.warn(RoomList);
         let info = JSON.parse(text);//转换text
@@ -100,13 +104,16 @@ var server = ws.createServer(function (conn) {
                 room.update(info);
             }
         });
+
     })
     conn.on("close", function (code, reason) {
-        console.warn(code);
-        console.warn(reason);
+        console.warn('Gcode：', code);
+        console.warn('Greason：', reason);
         console.log("关闭连接")
     });
     conn.on("error", function (code, reason) {
+        console.warn('Ycode：', code);
+        console.warn('Yreason：', reason);
         console.log("异常关闭")
     });
 }).listen(12138)
