@@ -102,6 +102,8 @@ var server = ws.createServer(function (conn) {
         });
     })
     conn.on("close", function (code, reason) {
+        console.warn(code);
+        console.warn(reason);
         console.log("关闭连接")
     });
     conn.on("error", function (code, reason) {
