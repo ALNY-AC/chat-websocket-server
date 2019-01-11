@@ -110,9 +110,10 @@ var server = ws.createServer(function (conn) {
 
     })
     conn.on("close", function (code, reason) {
-        console.log("关闭连接：", room_id)
+        console.log("关闭连接：", room_id);
         RoomList.forEach(room => {
             if (room.room_id == room_id) {
+                room.removePlayer(userName);
                 room.update({
                     type: '',//类型
                     roomId: room_id,//房间号
@@ -127,9 +128,10 @@ var server = ws.createServer(function (conn) {
         });
     });
     conn.on("error", function (code, reason) {
-        console.log("异常关闭：", room_id)
+        console.log("异常关闭：", room_id);
         RoomList.forEach(room => {
             if (room.room_id == room_id) {
+                room.removePlayer(userName);
                 room.update({
                     type: '',//类型
                     roomId: room_id,//房间号
