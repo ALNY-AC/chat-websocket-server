@@ -68,6 +68,7 @@ var server = ws.createServer(function (conn) {
 
 
     let room_id = '';
+    let userName = '';
 
     conn.on("text", function (text) {
         console.warn(RoomList);
@@ -84,6 +85,7 @@ var server = ws.createServer(function (conn) {
          * 
          */
         room_id = info.roomId;
+        userName = info.userInfo.userName;
         if (info.type == 'addRoom') {
             info.message = '进入房间';
             let isAdd = true;
@@ -109,9 +111,37 @@ var server = ws.createServer(function (conn) {
     })
     conn.on("close", function (code, reason) {
         console.log("关闭连接：", room_id)
+        RoomList.forEach(room => {
+            if (room.room_id == room_id) {
+                room.update({
+                    type: '',//类型
+                    roomId: room_id,//房间号
+                    data: {},//扩展参数
+                    userInfo: {
+                        userId: '',
+                        userName: userName,
+                    },
+                    message: '退出房间',//发来的消息
+                });
+            }
+        });
     });
     conn.on("error", function (code, reason) {
         console.log("异常关闭：", room_id)
+        RoomList.forEach(room => {
+            if (room.room_id == room_id) {
+                room.update({
+                    type: '',//类型
+                    roomId: room_id,//房间号
+                    data: {},//扩展参数
+                    userInfo: {
+                        userId: '',
+                        userName: userName,
+                    },
+                    message: '退出房间',//发来的消息
+                });
+            }
+        });
     });
 }).listen(12138)
 console.log("WebSocket建立完毕.")
