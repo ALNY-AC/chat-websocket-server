@@ -1,6 +1,6 @@
 class Player {
     constructor(name, conn) {
-        this.name = '';//用户名称
+        this.name = name;//用户名称
         this.conn = conn;//连接句柄
         this.parent = null;//所属父级
     }
