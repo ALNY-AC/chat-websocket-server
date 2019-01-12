@@ -1,7 +1,9 @@
-const Bootstrap = require('./bootstrap')
-
+const Bootstrap = require('./src/bootstrap')
 const bootstrap = new Bootstrap(12138);
-bootstrap.init();
+console.log("服务器启动中……");
+bootstrap.init(() => {
+    console.log("启动成功~");
+});
 
 
 

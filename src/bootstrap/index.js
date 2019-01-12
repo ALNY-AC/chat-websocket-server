@@ -9,7 +9,7 @@ class Bootstrap {
     constructor(port) {
         this.port = port;
     }
-    init() {
+    init(fun) {
         const router = new Router();//创建一个路由实例
         //开启
         const wss = new WebSocket.Server({
@@ -23,6 +23,7 @@ class Bootstrap {
                 router.trigger(clientMsg, player);//传送给组件进行处理并接收返回
             });
         });
+        fun();
     }
 
 }
