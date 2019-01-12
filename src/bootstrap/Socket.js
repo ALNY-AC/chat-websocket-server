@@ -9,6 +9,7 @@ class Socket {
     }
     send(data = {}, component) {
         data.time = new Date().Format("yyyy-MM-dd hh:mm:ss")
+        data.uninxTime = parseInt(new Date().valueOf() / 1000)
         let sendData = {
             data: data,
             component: !component ? this.player.clientMsg.component : component,
