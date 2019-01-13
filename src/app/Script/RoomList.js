@@ -23,7 +23,6 @@ RoomList = {
         if (!this.roomList[roomId].getPlayer(userName)) {
             this.roomList[roomId].addPlayer(player);
         }
-        console.warn(player);
 
         return this.roomList[roomId];
 
