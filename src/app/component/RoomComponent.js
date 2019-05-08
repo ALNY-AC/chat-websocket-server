@@ -12,9 +12,12 @@ class RoomComponent extends Component {
         let room = RoomList.isPlayerInRoom(this.data.roomId, this.data.userName, player);
         room.update(this.data, 'send');
 
-        Object.keys(userRoomList).forEach(key => {
-            userRoomList[key].socket.send({ data: this.getRoomList() }, 'roomList');
-        });
+        setTimeout(() => {
+            Object.keys(userRoomList).forEach(key => {
+                userRoomList[key].socket.send({ data: this.getRoomList() }, 'roomList');
+            });
+        }, 100);
+
     }
     getRoomList() {
 
