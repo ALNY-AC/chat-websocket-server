@@ -17,11 +17,13 @@ RoomList = {
         if (!this.roomList[roomId]) {
             // 不存在
             // 创建一个
-            this.roomList[roomId] = new Room();
+            this.roomList[roomId] = new Room(roomId, userName);
+            console.warn(`用户：[${userName}] 创建房间:[${roomId}]`);
 
         }
         if (!this.roomList[roomId].getPlayer(userName)) {
             this.roomList[roomId].addPlayer(player);
+            console.warn(`用户：[${userName}] 加入房间:[${roomId}]`);
         }
 
         return this.roomList[roomId];

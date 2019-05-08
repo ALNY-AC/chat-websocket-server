@@ -15,7 +15,9 @@ class Socket {
             component: !component ? this.player.clientMsg.component : component,
         }
         sendData = JSON.stringify(sendData);
-        this.socket.send(sendData);
+        if (this.socket.readyState == 1) {
+            this.socket.send(sendData);
+        }
     }
     on(name, fun) {
         this.socket.on(name, fun);

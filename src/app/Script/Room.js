@@ -1,15 +1,29 @@
+const getRandom = require('./getRandom')
+
 class Room {
     constructor(room_id, room_name) {
         this.playerList = [];
+        this.contentList = [];
         this.room_id = room_id;
         this.room_name = room_name;
         this.add_time = '';
         this.edit_time = '';
     }
     update(data, copm) {
+
+        this.contentList.push(data);
+
+        console.warn();
+        console.warn('发送聊天广播：=========== ---> ' + copm);
+        console.warn(`用户[${data.userName}]说：${data.msg}`);
+
         this.playerList.forEach(player => {
+            console.warn(`[${data.userName}]------->[${player.clientMsg.data.userName}]`);
             player.socket.send(data, copm);
         });
+        console.warn('结束聊天广播：===========');
+        console.warn();
+
     }
     addPlayer(player) {
         this.playerList.push(player);
@@ -17,10 +31,11 @@ class Room {
 
         const remove = () => {
             this.removePlayer(player.clientMsg.data.userName);
-            this.update({
-                userName: player.clientMsg.data.userName,
-                msg: '[ ' + player.clientMsg.data.userName + ' ] 退出房间'
-            }, 'userExit');
+            // this.update({
+            //     id: getRandom(),
+            //     userName: player.clientMsg.data.userName,
+            //     msg: '[ ' + player.clientMsg.data.userName + ' ] 退出'
+            // }, 'userExit');
         }
 
         player.socket.on('close', remove)
