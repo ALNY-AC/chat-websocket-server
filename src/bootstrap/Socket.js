@@ -9,10 +9,13 @@ class Socket {
     }
     send(data = {}, component) {
         data.time = new Date().Format("yyyy-MM-dd hh:mm:ss")
-        data.uninxTime = parseInt(new Date().valueOf() / 1000)
+        data.uninxTime = parseInt(new Date().valueOf() / 1000);
+        if (!component) {
+            console.warn("component不存在！", data);
+        }
         let sendData = {
             data: data,
-            component: !component ? this.player.clientMsg.component : component,
+            component: component,
         }
         sendData = JSON.stringify(sendData);
         if (this.socket.readyState == 1) {
