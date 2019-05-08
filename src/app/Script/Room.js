@@ -14,7 +14,7 @@ class Room {
         this.contentList.push(data);
 
         console.warn();
-        console.warn('发送聊天广播：=========== ---> ' + copm);
+        console.warn('发送聊天广播：=========== ---> ' + copm + ' | ' + this.room_id);
         console.warn(`用户[${data.userName}]说：${data.msg}`);
 
         this.playerList.forEach(player => {
