@@ -16,13 +16,13 @@ class Bootstrap {
             port: this.port,
         });
         wss.on('connection', function connection(socket) {
-            setTimeout(() => {
-                const player = new Player(new Socket(socket));//创建用户
-                socket.on('message', function incoming(msg) {
-                    let clientMsg = JSON.parse(msg);//接收数据
-                    router.trigger(clientMsg, player);//传送给组件进行处理并接收返回
-                });
-            }, 100);
+            // setTimeout(() => {
+            const player = new Player(new Socket(socket));//创建用户
+            socket.on('message', function incoming(msg) {
+                let clientMsg = JSON.parse(msg);//接收数据
+                router.trigger(clientMsg, player);//传送给组件进行处理并接收返回
+            });
+            // }, 100);
         });
         fun();
     }
